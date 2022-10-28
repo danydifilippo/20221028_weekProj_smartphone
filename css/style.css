@@ -1,9 +1,29 @@
-* {
-    box-sizing: border-box;
-}
 
 body {
     font-family: 'Open Sans', sans-serif;
+    background-image: url(../img/bgph.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header {
+    text-align: center;
+}
+header p{
+    font-size: 18px;
+}
+#container {
+    display: flex;
+    justify-content: space-around;
+    width: 90vw;
+    height: 90vh;
+    margin-top: 2em;
+}
+.userBox {
+line-height: 10px;
+text-align: center;
 }
 section {
     width: 18em;
@@ -11,11 +31,20 @@ section {
     border: 8px solid black;
     border-radius: 25px;
     overflow: auto;
+    margin: 20px;
 }
 .smartph {
     padding: 0.5em 1em;
-    background-color: #4eb7bc;
     color: white;
+}
+#utente1 .smartph{
+    background-color: #fc70c4;
+}
+#utente2 .smartph{
+    background-color: #42b87b;
+}
+#utente3 .smartph{
+    background-color: #4eb7bc;
 }
 .displayUp {
     display: flex;
@@ -23,4 +52,24 @@ section {
 }
 .smartph p{
     margin: 0;
+}
+.central {
+    font-size: 17px;;
+    text-align: center;
+}
+.central img{
+    width: 90px;
+    border-radius: 50%;
+}
+#utente1{
+    background-image: url(../img/bg_us1.jpeg);
+    background-size: cover;
+}
+#utente2{
+    background-image: url(../img/bg_us2.jpeg);
+    
+}
+#utente3{
+    background-image: url(../img/bg_us3.jpeg);
+    background-size: cover;
 }

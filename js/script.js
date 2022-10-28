@@ -83,31 +83,47 @@ console.log(iphone.minutiChiamate);
 console.log(iphone.secondiChiamate);
 console.log(iphone.credito);
 class User {
-    constructor(name, age, smartphone) {
+    constructor(name, age, smartphone, callingTo, callTime, picture) {
         this.name = name;
         this.age = age;
         this.smartphone = smartphone;
+        this.callingTo = callingTo;
+        this.callTime = callTime;
+        this.picture = picture;
     }
 }
 class Utente extends User {
-    getName() {
-        return this.name;
-    }
-    getAge() {
-        return this.age;
-    }
-    getSmartphone() {
-        return this.smartphone;
+    constructor(name, age, smartphone, callingTo, callTime, picture, userName, job) {
+        super(name, age, smartphone, callingTo, callTime, picture);
+        this.userName = userName;
+        this.job = job;
     }
 }
-let user1 = new Utente("Giulia", 22, iphone);
-let user2 = new Utente("Maria", 52, huawei);
-let user3 = new Utente("Pietro", 41, samsung);
+let user1 = new Utente("Giulia", 22, iphone, "amiche e ragazzo", "dai 20 ai 40 minuti", "../img/giulia.jpeg", "utente1", "studentessa");
+let user2 = new Utente("Maria", 52, huawei, "familiari vicini e lontani", "dai 30 ai 40 minuti", "../img/maria.jpg", "utente2", "casalinga");
+let user3 = new Utente("Pietro", 41, samsung, "fornitori e trasportatori", "15 ai 20 minuti", "../img/pietro.jpeg", "utente3", "Concessionario ");
+let users = [user1, user2, user3];
 window.onload = () => {
     let date = new Date();
-    let smartph = document.querySelector(".smartph");
-    smartph.innerHTML = `<div class="displayUp">
-<p>${date.getHours()}:${date.getMinutes()}</p>
-<i class="fas fa-wifi"></i>
-</div>`;
+    let container = document.querySelector("#container");
+    users.forEach(element => {
+        container.innerHTML += `
+    <div><div class="userBox"><h2>${element.name}</h2><h4>${element.age} anni</h4>
+    <p><strong>Occupazione:</strong></p><p>${element.job}</p>
+    <p><strong>Sta la telefono soprattutto con:</strong></p><p>${element.callingTo}</p>
+    <p><strong>Tempo stimato:</strong></p><p>${element.callTime}</p></div>
+    <section id="${element.userName}">
+        <div class="smartph">
+            <div class="displayUp">
+                <p>${date.getHours()}:${date.getMinutes()}</p>
+                <p><i class="fas fa-wifi"></i> <i class="fas fa-signal"></i> <i class="fas fa-battery-three-quarters"></i></p>
+            </div>
+        </div>
+        <div class="central">
+          <h3>${element.name}</h3>
+          <img src=${element.picture} alt="foto_user" />
+        </div>
+        </div>
+    </section>`;
+    });
 };
