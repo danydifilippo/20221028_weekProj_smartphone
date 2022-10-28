@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+section {
+    width: 18em;
+    height: 35em;
+    border: 8px solid black;
+    border-radius: 25px;
+    overflow: auto;
+}
+.smartph {
+    padding: 0.5em 1em;
+    background-color: #4eb7bc;
+    color: white;
+}
+.displayUp {
+    display: flex;
+    justify-content: space-between;
+}
+.smartph p{
+    margin: 0;
+}
