@@ -101,14 +101,14 @@ class Utente extends User {
 }
 let user1 = new Utente("Giulia", 22, iphone, "amiche e ragazzo", "dai 20 ai 40 minuti", "../img/giulia.jpeg", "utente1", "studentessa");
 let user2 = new Utente("Maria", 52, huawei, "familiari vicini e lontani", "dai 30 ai 40 minuti", "../img/maria.jpg", "utente2", "casalinga");
-let user3 = new Utente("Pietro", 41, samsung, "fornitori e trasportatori", "15 ai 20 minuti", "../img/pietro.jpeg", "utente3", "Concessionario ");
+let user3 = new Utente("Pietro", 41, samsung, "fornitori e trasportatori", "dai 15 ai 20 minuti", "../img/pietro.jpeg", "utente3", "Concessionario ");
 let users = [user1, user2, user3];
 window.onload = () => {
     let date = new Date();
     let container = document.querySelector("#container");
     users.forEach(element => {
         container.innerHTML += `
-    <div><div class="userBox"><h2>${element.name}</h2><h4>${element.age} anni</h4>
+    <div id="${element.userName}_"><div class="userBox"><h2>${element.name}</h2><h4>${element.age} anni</h4>
     <p><strong>Occupazione:</strong></p><p>${element.job}</p>
     <p><strong>Sta la telefono soprattutto con:</strong></p><p>${element.callingTo}</p>
     <p><strong>Tempo stimato:</strong></p><p>${element.callTime}</p></div>
