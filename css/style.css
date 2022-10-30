@@ -38,13 +38,13 @@ section {
     padding: 0.5em 1em;
     color: white;
 }
-#utente1 .smartph{
+#user1 .smartph{
     background-color: #fc70c4;
 }
-#utente2 .smartph{
+#user2 .smartph{
     background-color: #42b87b;
 }
-#utente3 .smartph{
+#user3 .smartph{
     background-color: #4eb7bc;
 }
 .displayUp {
@@ -62,20 +62,20 @@ section {
     width: 90px;
     border-radius: 50%;
 }
-#utente1{
+#user1{
     background-image: url(../img/bg_us1.jpeg);
     background-size: cover;
 }
-#utente2{
+#user2{
     background-image: url(../img/bg_us2.jpeg);
     
 }
-#utente3{
+#user3{
     background-image: url(../img/bg_us3.jpeg);
     background-size: cover;
 }
 
-#utente1_{
+#user1_{
     background-image: url(../img/sfondo1.png);
     background-repeat: no-repeat;
     background-position-x: center;
@@ -83,7 +83,7 @@ section {
     padding: 100px;
     padding-top: 20px;
 }
-#utente2_{
+#user2_{
     background-image: url(../img/sfondo2.jpeg);
     background-repeat: no-repeat;
     background-position-x: center;
@@ -92,7 +92,7 @@ section {
     padding-top: 20px;
     
 }
-#utente3_{
+#user3_{
     background-image: url(../img/sfondo3.png);
     background-repeat: no-repeat;
     background-position-x: center;
@@ -133,19 +133,19 @@ section {
 .ricaricabtn{
     background-color: #00a6d8;
 }
-#utente1 .buttons {
+#user1 .buttons {
     background-color: #feaddeb1;  
 }
-#utente2 .buttons {
+#user2 .buttons {
     background-color: #73dba5b3;  
 }
-#utente3 .buttons {
+#user3 .buttons {
     background-color: #7be4e9b0;  
 }
 .d-none{
     display: none;
 }
-.credit, .ricarica, .chiamare {
+.credit, .ricarica, .chiamare, .chargement, .endcalling {
     background-color: #cae2fbd7;
     text-align: center;
     color: #1c344d;
@@ -168,7 +168,7 @@ section {
     width: 50%;
 }
 
-.credit .close, .ricarica .ricbtn {
+.credit .close, .ricarica .ricbtn, .chargement .close, .endcalling .close {
     border-right: 0.5px solid rgb(143, 143, 143);
 }
 .chargeInput {
@@ -177,4 +177,14 @@ section {
     color: white;
     font-size: 20px;
     text-align: center;
+    margin-bottom: 1em;
+}
+.fa-phone-slash{
+    color: red;
+}
+.closeCallbtn {
+    background: transparent;
+    border: transparent;
+    font-size: 20px;
+    margin-bottom: 1em;
 }

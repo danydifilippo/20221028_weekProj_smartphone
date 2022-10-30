@@ -1,3 +1,5 @@
+// classi e metodi
+
 class Smartphone {
     numeroChiamate:number=0
     oreChiamate:number=0
@@ -40,43 +42,14 @@ class Smartphone {
 
 }
 
-function time () {
-    let h:number = 0;
-    let mn:number = 0;
-    let s:number = 0;
-    let startTime = setInterval (function() {
-        s++;
-        if(s===59){
-           mn++;
-           s=0 
-        } else if(mn===59){
-            h++;
-            mn=0;
-        }
-    },1000);
-}
-time()
 
 let iphone = new Smartphone ();
 let huawei = new Smartphone ();
 let samsung = new Smartphone ();
 
-iphone.ricarica(50)
-console.log(iphone.credito);
-
-iphone.chiamata(3,15,24)
-console.log(iphone.oreChiamate)
-console.log(iphone.minutiChiamate);
-console.log(iphone.secondiChiamate);
-
-console.log(iphone.credito);
-
-iphone.chiamata(0,50,44)
-console.log(iphone.oreChiamate)
-console.log(iphone.minutiChiamate);
-console.log(iphone.secondiChiamate);
-
-console.log(iphone.credito);
+iphone.ricarica(30)
+huawei.ricarica(40)
+samsung.ricarica(50)
 
 abstract class User {
     name:string
@@ -101,21 +74,26 @@ abstract class User {
 class Utente extends User {
     userName: string
     job: string
+    usualCall : string
 
-    constructor (name:string, age:number, smartphone:Smartphone,callingTo:string,callTime:string,picture:string,userName:string,job:string){
+    constructor (name:string, age:number, smartphone:Smartphone,callingTo:string,callTime:string,picture:string,userName:string,job:string,usualCall : string){
         super(name,age,smartphone,callingTo,callTime,picture)
         this.userName = userName
         this.job=job
+        this.usualCall = usualCall
     }
 }
 
-let user1 = new Utente ("Giulia", 22, iphone,"amiche e ragazzo","dai 20 ai 40 minuti","../img/giulia.jpeg","utente1","studentessa")
-let user2 = new Utente ("Maria", 52, huawei,"familiari vicini e lontani","dai 30 ai 40 minuti","../img/maria.jpg","utente2","casalinga")
-let user3 = new Utente ("Pietro", 41, samsung,"fornitori e trasportatori","dai 15 ai 20 minuti","../img/pietro.jpeg","utente3","Rivenditore di auto")
+let user1 = new Utente ("Giulia", 22, iphone,"amiche e ragazzo","dai 20 ai 40 minuti","../img/giulia.jpeg","user1","studentessa", "Paolo🥰")
+let user2 = new Utente ("Maria", 52, huawei,"familiari vicini e lontani","dai 30 ai 40 minuti","../img/maria.jpg","user2","casalinga","Giovanna 👩🏼‍🦰")
+let user3 = new Utente ("Pietro", 41, samsung,"fornitori e trasportatori","dai 15 ai 20 minuti","../img/pietro.jpeg","user3","Rivenditore di auto", "MVE Trasporti 🚛")
  
 let users = [user1, user2, user3]
 
-window.onload = () => {
+
+
+// Caricamento Html
+window.onload = () =>{
 let date = new Date()
 let container = document.querySelector("#container") as HTMLDivElement
 users.forEach(element => {
@@ -136,82 +114,186 @@ users.forEach(element => {
           <img src=${element.picture} alt="foto_user" />
         </div>
         <div class="buttons">
-        <p><button class="creditobtn btn"><i class="fas fa-euro-sign"></i></button>Credito</p>
-        <p><button class="chiamabtn btn"><i class="fas fa-phone"></i></button>Chiama</p>
-        <p><button class="ricaricabtn btn"><i class="fas fa-sync-alt"></i></button>Ricarica</p>
-        <div class="d-none credit">
-        <h3><strong>Credito disponibile</strong></h3>
-    <p>Il tuo credito residuo è di ${element.smartphone.credito} €</p>
-    <input type="button" value="OK" class="close"><input type="button" value="Ricarica" class="charge"></div>
-      </div>
-  <div class="d-none ricarica">
-<h3><strong>Ricarica il tuo credito</strong></h3>
-<p>Inserisci l'importo e conferma</p>
-<input type="number" class="chargeInput">
-<input type="button" value="Ricarica" class="ricarbtns ricbtn"><input type="button" value="Esci" class="close ricarbtns"></div>      
-</div>
+            <p><button class="creditobtn btn"><i class="fas fa-euro-sign"></i></button>Credito</p>
+            <p><button class="chiamabtn btn"><i class="fas fa-phone"></i></button>Chiama</p>
+            <p><button class="ricaricabtn btn"><i class="fas fa-sync-alt"></i></button>Ricarica</p>
+            <div class="d-none endcalling">
+                <h3><strong>Chiamata terminata</strong></h3>
+                <p class="endcall"></p>
+                <input type="button" value="OK" class="close ricarbtns"><input type="button" value="Credito" class="creditobtn ricarbtns">
+            </div>
+            <div class="d-none chargement">
+                <h3><strong>Ricarica effettuata</strong></h3>
+                <p class="cred"></p>
+                <input type="button" value="OK" class="close ricarbtns"><input type="button" value="Credito" class="creditobtn ricarbtns">
+            </div>
+            <div class="d-none ricarica">
+                <input type="text" value="${element.userName}" class="d-none inpImp">
+                <h3><strong>Ricarica il tuo credito</strong></h3>
+                <p>Inserisci l'importo e conferma</p>
+                <input type="number" class="chargeInput">
+                <input type="button" value="Ricarica" class="ricarbtns ricbtn"><input type="button" value="Esci" class="ricarbtns close">    
+            </div>
+            <div class="d-none chiamare">
+                <h3><strong>Chiamata in uscita</strong></h3>
+                <p>${element.usualCall}</p>
+                <button class="closeCallbtn closeCall"><i class="fas fa-phone-slash"></i></button>
+            </div>
+            <div class="d-none credit">
+                <h3><strong>Credito disponibile</strong></h3>
+                <p class="cr">Il tuo credito residuo è di ${element.smartphone.credito} €</p>
+                <input type="button" value="OK" class="close"><input type="button" value="Ricarica" class="charge">
+            </div>
+        </div>    
     </section>
-    <div class="d-none chiamare">
+</div>`
 
-    </div>`});
+
+// funzioni e attivazione pulsanti
+
+    let ricbtn = document.querySelectorAll<HTMLDivElement>('.ricbtn')
+    ricbtn.forEach(elem=> {
+        let chargeInput = elem.parentNode?.querySelector('.chargeInput') as HTMLInputElement
+        let userNow = elem.parentNode?.querySelector('.inpImp') as HTMLInputElement
+        let changecr = elem.parentNode?.parentNode?.querySelector('.cr') as HTMLElement
+        let changecred = elem.parentNode?.parentNode?.querySelector('.cred') as HTMLElement
+        elem.addEventListener('click', () => {
+        elem.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.previousElementSibling?.classList.add('d-none')
+        elem.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.previousElementSibling?.previousElementSibling?.classList.remove('d-none')
+            switch (userNow.value){
+                case 'user1':
+                    user1.smartphone.ricarica(Number(chargeInput.value));
+                    changecr.innerHTML = `Il tuo credito residuo è di ${user1.smartphone.credito} € `
+                    changecred.innerHTML = `Ciao ${user1.name},<br>la ricarica di ${chargeInput.value} € è stata effettuata con successo...<br>Controlla ora il tuo credito`
+                    user1.smartphone.azzeraChiamate()
+                    break;
+                case 'user2':
+                    user2.smartphone.ricarica(Number(chargeInput.value));
+                    changecr.innerHTML = `Il tuo credito residuo è di ${user2.smartphone.credito} € `
+                    changecred.innerHTML = `Ciao ${user2.name},<br>la ricarica di ${chargeInput.value} € è stata effettuata con successo...<br> Controlla ora il tuo credito`
+                    user2.smartphone.azzeraChiamate()
+                    break;
+                case 'user3':
+                    user3.smartphone.ricarica(Number(chargeInput.value));
+                    changecr.innerHTML = `Il tuo credito residuo è di ${user3.smartphone.credito} € `
+                    changecred.innerHTML = `Ciao ${user3.name},<br>la ricarica di ${chargeInput.value} € è stata effettuata con successo...<br> Controlla ora il tuo credito`
+                    user3.smartphone.azzeraChiamate()
+                    break;
+            }
+            chargeInput.value=''
+        })
+        
+    })
+   
+    let chiama = document.querySelectorAll<HTMLDivElement>('.chiamabtn')
+    chiama.forEach(utente => {
+        utente.addEventListener('click', () => {
+        let userNow = utente.parentNode?.parentNode?.querySelector('.inpImp') as HTMLInputElement
+        let changecr = utente.parentNode?.parentNode?.querySelector('.cr') as HTMLElement 
+        switch (userNow.value){
+            case 'user1':
+                if(user1.smartphone.credito<=0) {
+                utente.parentNode?.parentNode?.lastElementChild?.classList.remove('d-none')
+                 changecr.innerHTML = `Il tuo credito residuo è di 0 €, ricarica la tua scheda per poter effettuare chiamate`
+                } else {utente.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.classList.remove('d-none')}
+                break;
+            case 'user2':
+                if(user2.smartphone.credito<=0) {
+                    utente.parentNode?.parentNode?.lastElementChild?.classList.remove('d-none')
+                     changecr.innerHTML = `Il tuo credito residuo è di 0 €, ricarica la tua scheda per poter effettuare chiamate`
+                    } else {utente.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.classList.remove('d-none')}
+                    break;
+            case 'user3':
+                if(user3.smartphone.credito<=0) {
+                    utente.parentNode?.parentNode?.lastElementChild?.classList.remove('d-none')
+                     changecr.innerHTML = `Il tuo credito residuo è di 0 €, ricarica la tua scheda per poter effettuare chiamate`
+                    } else {utente.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.classList.remove('d-none')}
+                    break;
+        }
+         
+            
+        } )
+        } )
+    
     let credito = document.querySelectorAll<HTMLDivElement>('.creditobtn')
     credito.forEach(utn => {
         utn.addEventListener('click', () => {
         utn.parentNode?.parentNode?.lastElementChild?.classList.remove('d-none')
-        })
+        utn.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.previousElementSibling?.previousElementSibling?.classList.add('d-none') 
+        utn.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.previousElementSibling?.previousElementSibling?.previousElementSibling?.classList.add('d-none') 
     })
+    })
+
+
     let ricarica = document.querySelectorAll<HTMLDivElement>('.ricaricabtn')
     ricarica.forEach(ute => {
         ute.addEventListener('click', () => {
-        ute.parentNode?.parentNode?.parentNode?.lastElementChild?.classList.remove('d-none')
+        ute.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.previousElementSibling?.classList.remove('d-none')
         })
     })
     let close = document.querySelectorAll<HTMLDivElement>('.close')
     close.forEach(el=> {
         el.addEventListener('click', () => {
-        el.parentNode?.parentNode?.lastElementChild?.classList.add('d-none')
+        el.parentNode?.parentNode?.lastElementChild?.classList.add('d-none') 
+        el.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.previousElementSibling?.previousElementSibling?.classList.add('d-none') 
+        el.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.previousElementSibling?.previousElementSibling?.previousElementSibling?.classList.add('d-none') 
+        el.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.previousElementSibling?.classList.add('d-none')
     })
+    });
     let charge = document.querySelectorAll<HTMLDivElement>('.charge')
     charge.forEach(ele=> {
         ele.addEventListener('click', () => {
-        ele.parentNode?.parentNode?.parentNode?.lastElementChild?.classList.remove('d-none')
+        ele.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.previousElementSibling?.classList.remove('d-none')
         ele.parentNode?.parentNode?.lastElementChild?.classList.add('d-none')
         })
     })
-    let ricbtn = document.querySelectorAll<HTMLDivElement>('.ricbtn')
-    ricbtn.forEach(elem=> {
-        elem.addEventListener('click', () => {
-        // elem.parentNode?.parentNode?.lastElementChild?.classList.add('d-none')
-         let chargeInput = document.querySelectorAll<HTMLDivElement>('.chargeInput')
-           console.log(chargeInput.values());
-            
-        
+    let closeCall = document.querySelectorAll<HTMLButtonElement>('.closeCall')
+    closeCall.forEach(calling=> {
+        calling.addEventListener('click',() =>{
+            calling.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.classList.add('d-none')
+            calling.parentNode?.parentNode?.lastElementChild?.previousElementSibling?.previousElementSibling?.previousElementSibling?.previousElementSibling?.classList.remove('d-none')
+            let userNow = calling.parentNode?.parentNode?.querySelector('.inpImp') as HTMLInputElement
+            let changetime = calling.parentNode?.parentNode?.querySelector('.endcall') as HTMLElement
+            let changecr = calling.parentNode?.parentNode?.querySelector('.cr') as HTMLElement
+            let time_mn = Math.floor(Math.random()*25)
+            let time_s = Math.floor(Math.random()*59)
+            switch (userNow.value){
+                case 'user1':
+                    user1.smartphone.chiamata(0,time_mn,time_s)
+                    if (user1.smartphone.credito < 0) {
+                        changecr.innerHTML = `Il tuo credito residuo è di 0 €, ricarica la tua scheda per poter effettuare chiamate`
+                        changetime.innerHTML = `La tua ultima chiamata è stata interrotta per mancanza di credito.<br> Effettua subito una ricarica per poter continuare le tue telefonate`
+                    } else {
+                    changecr.innerHTML = `Il tuo credito residuo è di ${user1.smartphone.credito} € `
+                    changetime.innerHTML = `La tua ultima chiamata è durata ${time_mn} minuti e ${time_s} secondi<br> Il tuo credito ora è di ${user1.smartphone.credito} € <br>
+                    Dall'ultima ricarica hai effettuato ${user1.smartphone.numeroChiamate} chiamate per un tempo totale di ${user1.smartphone.oreChiamate}h:${user1.smartphone.minutiChiamate}m:${user1.smartphone.secondiChiamate}s`}
+                    break;
+                case 'user2':
+                    user2.smartphone.chiamata(0,time_mn,time_s)
+                    if (user2.smartphone.credito < 0) {
+                        changecr.innerHTML = `Il tuo credito residuo è di 0 €, ricarica la tua scheda per poter effettuare chiamate`
+                        changetime.innerHTML = `La tua ultima chiamata è stata interrotta per mancanza di credito.<br> Effettua subito una ricarica per poter continuare le tue telefonate`
+                    } else {
+                    changecr.innerHTML = `Il tuo credito residuo è di ${user2.smartphone.credito} € `
+                    changetime.innerHTML = `La tua ultima chiamata è durata ${time_mn} minuti e ${time_s} secondi<br> Il tuo credito ora è di ${user2.smartphone.credito} € <br>
+                    Dall'ultima ricarica hai effettuato ${user2.smartphone.numeroChiamate} chiamate per un tempo totale di ${user2.smartphone.oreChiamate}h:${user2.smartphone.minutiChiamate}m:${user2.smartphone.secondiChiamate}s`}
+                    break;
+                case 'user3':
+                    user3.smartphone.chiamata(0,time_mn,time_s)
+                    if (user3.smartphone.credito < 0) {
+                        changecr.innerHTML = `Il tuo credito residuo è di 0 €, ricarica la tua scheda per poter effettuare chiamate`
+                        changetime.innerHTML = `La tua ultima chiamata è stata interrotta per mancanza di credito.<br> Effettua subito una ricarica per poter continuare le tue telefonate`
+                    } else {
+                    changecr.innerHTML = `Il tuo credito residuo è di ${user3.smartphone.credito} € `
+                    changetime.innerHTML = `La tua ultima chiamata è durata ${time_mn} minuti e ${time_s} secondi<br> Il tuo credito ora è di ${user3.smartphone.credito} € <br>
+                    Dall'ultima ricarica hai effettuato ${user3.smartphone.numeroChiamate} chiamate per un tempo totale di ${user3.smartphone.oreChiamate}h:${user3.smartphone.minutiChiamate}m:${user3.smartphone.secondiChiamate}s`}
+                    break;
+            }
         })
     })
-   
-    //     let charge1 = document.querySelector('#charge_utente1') as HTMLButtonElement
-    //         charge1.addEventListener('click',()=>{
-    //             noteCredit1.classList.add('d-none')
-    //             let ricarica1 = document.querySelector('#utente1_ricarica') as HTMLButtonElement
-    //             ricarica1.classList.remove('d-none')
-    //     })
-    // })
-    // })
-
-    // let ricarica = document.querySelector('#Giulia_Char') as HTMLInputElement
-    // ricarica.addEventListener ('click', ()=>{
-    //     let noteRicarica = document.querySelector('#Giulia_ricarica') as HTMLDivElement
-    //     console.log(ricarica.children.namedItem);
-    //      ricarica.childNodes
-    // })
-    // let chiama = document.querySelectorAll<HTMLDivElement>('.chiama')
-    // chiama.forEach(utn => {
-    //     utn.addEventListener('click', () => {
-    //        console.log(utn.parentNode?.parentNode?.parentNode?.lastElementChild);
-    //        utn.nextElementSibling
-    //     } )
-        
-     });
+});
 }
-    
+
+        
+     
     
