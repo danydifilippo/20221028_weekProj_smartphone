@@ -1,4 +1,7 @@
 
+*{
+    box-sizing: border-box;
+}
 body {
     font-family: 'Open Sans', sans-serif;
     background-image: url(../img/blue-phone-orange-background-760.jpeg);
@@ -187,4 +190,15 @@ section {
     border: transparent;
     font-size: 20px;
     margin-bottom: 1em;
+}
+
+@media screen and (max-width:1500px) {
+    #container{
+        flex-direction: column;
+        justify-content: normal;
+        align-items: center;
+    }
+    body{
+        height: 210em;
+    }
 }

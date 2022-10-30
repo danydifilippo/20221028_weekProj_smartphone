@@ -38,6 +38,7 @@ class Smartphone {
         this.numeroChiamate = 0
         this.minutiChiamate = 0
         this.oreChiamate = 0
+        this.secondiChiamate = 0
     }
 
 }
